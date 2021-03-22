@@ -1,0 +1,30 @@
+;Описание;IN;OUT
+1;;;
+comper;создает список для анотации генов по заменам;Reference.fa, TrueRef.fa, refgenes.gb.gff.Truncated;Comp.txt
+fa_standarter;делает из генбанка нормальный fasta-файл;ASR.raxml.reduced_NC_012920.1.fas;RefAli.fa
+lighter;подготовка файла для упрощенной аннотации генов;refgenes.gb.gff;refgenes.gb.gff.Truncated
+taker;ищет замены;prank_tre.ordN.coll, ASR.raxml.reduced.prank.anconly.fas, ASR.raxml.reduced.prank.anconly.fas, RefAli.fa;Replacements.txt
+;;;
+2;;;
+_1_full;ищет замены по дереву;prank_tre.ordN.coll, файлы из папки Neighbors_full, hyperlist.csv, ASR.raxml.reduced.prank.anconly.fas, ;hyperlist.csv, файлы в папке Neighbors_full
+;;;
+3;;;
+_1_prolonger;ищет замены по дереву;prank_tre.ordN.coll, файлы из папки Neighbors, файлы из папки Neighbors_prolong, hyperlist.csv, ASR.raxml.reduced.prank.anconly.fas, RefAli.fa;hyperlist.csv, файлы Neighbors_prolong
+_2.5_recooler;вместо трех символов строка;файлы из папки FilledN, ASR.raxml.reduced.prank.anconly.fas, RefAli.fa;файлы в папку Filled5
+_2_refery;добавляет аннотацию;файлы из папки Neighbors, Comp.txt;файлы в папку FilledN
+;;;
+4;;;
+_1_haplo;ищет замены по цепочкам гаплогрупп;iqtree_tre.ordN.coll.pathS, hyperlist.csv, файлы из папки Neighbors, ASR.raxml.reduced.prank.anconly.fas, RefAli.fa;hyperlist.csv, файлы в папку Neighbors
+_3_haplobox; суммирование в один файл цепочек гаплогрупп;prank_tre.ordN.coll.pathS;файлы в папку Haplo, файлы в папку  FilledN
+;;;
+5;;;
+1_hypertree;ищет замены по дереву;prank_tre.ordN.coll, ASR.raxml.reduced.prank.anconly.fas, RefAli.fa;Replacements.txt
+2_recool;убирает те где пробел на замене;Replacements.txt;ReplacementsNOgaps
+3_recool;убирает лишние столбцы;fulllist.csv;fulltree.csv
+3_refery;добавляет аннотацию;ReplacementsNOgaps, Comp.txt;ReplacementsTrueNOgaps
+;;;
+6;;;
+mutspec;статистика по заменам для мутспека;fulltree.csv;mutspec_pairs.csv, mutspec_sum.txt
+;;;
+7;;;
+recoolN;убирает те где N на замене;ReplacementsTrueNOgaps.txt;ReplacementsTrueNOgapsWithoutN.txt
